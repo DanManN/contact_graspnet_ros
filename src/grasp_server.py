@@ -82,7 +82,8 @@ class GraspPlanner():
         global_config = config_utils.load_config(
             ckpt_dir,
             batch_size=NUM_ITERS,
-            # arg_configs=['TEST.second_thres:0.0', 'TEST.first_thres:0.0']
+            # arg_configs=['TEST.second_thres:0.0', 'TEST.first_thres:0.0'],
+            arg_configs=['TEST.num_samples:1000'],
         )
 
         # Build the model
