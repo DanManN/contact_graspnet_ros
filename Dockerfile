@@ -14,10 +14,10 @@ RUN echo 'user:user' | chpasswd
 ENV DEBIAN_FRONTEND=noninteractive
 ENV LANG=C.UTF-8
 ENV LC_ALL=C.UTF-8
-# RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys F42ED6FBAB17C654
-# RUN apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/3bf863cc.pub
+
 RUN curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
-RUN apt update && apt upgrade wget cmake gdb git python3-dev cuda-nvcc-11-4 libcudnn8 -y && \
+
+RUN apt update && apt upgrade curl wget cmake gdb git python3-dev cuda-nvcc-11-4 libcudnn8 -y && \
 	apt download libcublas-12-0 && \
 	mkdir contents && \
 	dpkg-deb -xv $(ls | grep libcublas-12-0*.deb) contents/ && \
@@ -34,6 +34,9 @@ RUN mkdir -p ~/miniconda3 && \
 	bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3 && \
 	rm ~/miniconda3/miniconda.sh && \
 	conda init
+
+RUN conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main && \
+	conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r
 
 RUN conda create -n contact_graspnet_env \
 	python=3.9 \
