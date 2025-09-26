@@ -1,1 +1,1 @@
-singularity build contact-graspnet.tar docker-archive://contact-graspnet.tar
+singularity build contact-graspnet.sif docker-archive://contact-graspnet.tar
