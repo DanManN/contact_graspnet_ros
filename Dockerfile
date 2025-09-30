@@ -88,4 +88,10 @@ RUN echo "source ~/cgn_ws/devel/setup.bash" >> ~/.bashrc && \
 
 WORKDIR /home/user/cgn_ws/src/cgn_ros
 
+# Fix QT not being able to load "xcb" library
+ENV QT_QPA_PLATFORM=offscreen
+
+RUN sudo apt update && \
+	sudo apt install bind9-host tmux -y
+
 CMD ["bash"]
